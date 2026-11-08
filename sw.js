@@ -1,5 +1,5 @@
-const CACHE = 'rubin-gp-today-v4-1-pwa-1';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE = 'rubin-gp-today-v4-1-pwa-3';
+const ASSETS = ['./', './index.html', './manifest.webmanifest', './rubin-portrait-192.png', './rubin-portrait-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
