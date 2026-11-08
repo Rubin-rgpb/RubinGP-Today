@@ -112,7 +112,21 @@ main{max-width:720px!important;padding:12px 14px 104px!important}
 #goals .goal-create-wrap{margin-bottom:12px}
 #goals .goal-create-wrap[hidden]{display:none!important}
 </style>
-</head><body><main><div id="designEdition"><span><strong>RUBIN GP · TODAY 4.8</strong> · обновлённый интерфейс</span><span>✦ MOBILE</span></div><header class="hero"><div class="between"><div class="eyebrow" id="brandName">RUBIN GP · TODAY</div><button class="subtle-edit" id="brandEdit" aria-label="Настроить заголовок">✎</button></div><div class="heroidentity"><img id="profilePhoto" class="profile-photo hide" alt="Аватар"><div><h1 id="heroHeading">Сегодня ☀️</h1><p id="heroSubtitle">Один ясный шаг важнее десяти обещаний.</p></div></div><div class="between"><span id="dateLabel" class="sub"></span><span id="liveClock" class="sub" aria-label="Текущее время"></span><b id="pct">0%</b></div><div class="bar"><div id="progress"></div></div><div id="count" class="hint"></div></header><div class="compact-search"><input class="field" id="globalSearch" placeholder="🔎 Поиск по всему приложению"><div id="globalResults"></div></div><div class="card gold" id="dailyThought"></div><nav class="nav" id="nav"><button data-tab="today">☀️ Сегодня</button><button data-tab="tasks">☑️ Задачи</button><button data-tab="goals">🎯 Цели</button><button data-tab="notes">📝 Заметки</button><button data-tab="calendar">🗓️ Календарь</button><button data-tab="rituals">🏆 Ритуалы</button><button data-tab="history">📈 История</button><button data-tab="settings">⚙️ Настройки</button></nav>
+<style>
+#coverCropDialog{width:min(95vw,510px);max-height:90vh;overflow:auto;border:1px solid #3c516a;border-radius:18px;padding:18px;background:#15253b;color:#eaf1fc;box-shadow:0 22px 70px #000a}
+#coverCropDialog::backdrop{background:#030a14c9}
+.crop-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.crop-head button{border:0;background:transparent;color:white;font-size:26px}
+.crop-preview{height:175px;border-radius:12px;background:#233951;touch-action:none;position:relative;overflow:hidden;cursor:grab;background-repeat:no-repeat}
+.crop-hint{position:absolute;bottom:8px;left:8px;padding:4px 7px;border-radius:6px;background:#06111cb3;color:#fff;font-size:11px;pointer-events:none}
+.crop-label{display:block;margin:16px 0 8px}.crop-label output{float:right}
+#coverCropDialog input[type=range]{width:100%;accent-color:#dcb774}
+.crop-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12px}
+.crop-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.crop-actions button{background:#263c58;color:#f2f5fc;border:1px solid #46607d;padding:11px 5px;border-radius:10px;font-size:12px}
+#coverSave{background:#dbb575;color:#132034;border:0;font-weight:700}
+#coverDelete{color:#ffb0b0}
+</style></head><body><main><div id="designEdition"><span><strong>RUBIN GP · TODAY 4.9</strong> · обновлённый интерфейс</span><span>✦ MOBILE</span></div><header class="hero"><div class="between"><div class="eyebrow" id="brandName">RUBIN GP · TODAY</div><button class="subtle-edit" id="brandEdit" aria-label="Настроить заголовок">✎</button></div><div class="heroidentity"><img id="profilePhoto" class="profile-photo hide" alt="Аватар"><div><h1 id="heroHeading">Сегодня ☀️</h1><p id="heroSubtitle">Один ясный шаг важнее десяти обещаний.</p></div></div><div class="between"><span id="dateLabel" class="sub"></span><span id="liveClock" class="sub" aria-label="Текущее время"></span><b id="pct">0%</b></div><div class="bar"><div id="progress"></div></div><div id="count" class="hint"></div></header><div class="compact-search"><input class="field" id="globalSearch" placeholder="🔎 Поиск по всему приложению"><div id="globalResults"></div></div><div class="card gold" id="dailyThought"></div><nav class="nav" id="nav"><button data-tab="today">☀️ Сегодня</button><button data-tab="tasks">☑️ Задачи</button><button data-tab="goals">🎯 Цели</button><button data-tab="notes">📝 Заметки</button><button data-tab="calendar">🗓️ Календарь</button><button data-tab="rituals">🏆 Ритуалы</button><button data-tab="history">📈 История</button><button data-tab="settings">⚙️ Настройки</button></nav>
 <section id="today" class="panel"><div class="card gold"><span class="badge">МОЙ ФОКУС</span><h2>🎯 Главное дело дня</h2><textarea id="focus" class="field" rows="2" placeholder="Какой конкретный результат я хочу получить?"></textarea><div class="actions"><button id="saveFocus" class="btn mini">✓ Сохранить главное дело</button><span class="hint" id="focusStatus" role="status"></span></div><p class="hint">Запиши одно действие, которое действительно важно.</p><div id="savedFocus" class="saved-preview preserve" aria-live="polite"></div></div><input class="field" id="todaySearch" placeholder="🔎 Поиск по делам сегодня"><div id="todayTasks"></div></section>
 <section id="calendar" class="panel"><div class="card"><h2>🗓️ Календарь</h2><p class="sub">Любая дата — хоть через несколько лет. Отметки сохраняются отдельно для каждого дня.</p><input type="date" class="field" id="calDate"><div class="actions"><button class="btn" id="calAdd">＋ Задача на дату</button><button class="btn alt" id="calNow">Сегодня</button></div><input id="calSearch" class="field" placeholder="🔎 Поиск по календарю"><div id="calList"></div></div></section>
 <section id="tasks" class="panel"><div class="card gold"><h2 id="taskHeading">➕ Новая задача</h2><p class="sub">Добавляй разовые или повторяющиеся дела. Для диктовки используй микрофон клавиатуры Samsung.</p><label class="muted">Что сделать?</label><input id="taskTitle" class="field" placeholder="Короткое название задачи"><label class="muted">Описание и подзадачи (каждая с новой строки)</label><textarea id="taskDescription" class="field" style="min-height:110px" placeholder="Подробности, ссылки, пункты плана... (можно с переносами строк)"></textarea><div class="row"><div style="flex:1"><label class="muted">Дата начала</label><input id="taskDate" type="date" class="field"></div><div style="flex:1"><label class="muted">Время (необязательно)</label><input id="taskTime" type="time" class="field"></div></div><div class="row"><div style="flex:1"><label class="muted">Приоритет</label><select id="taskPriority" class="field"><option value="normal">Обычная</option><option value="important">Важная</option><option value="urgent">Срочная</option><option value="low">Необязательная</option></select></div><div style="flex:1" hidden><label class="muted">Цвет карточки</label><select id="taskColor" class="field"><option value="auto">По приоритету</option><option value="blue">Синий</option><option value="green">Зелёный</option><option value="yellow">Жёлтый</option><option value="purple">Фиолетовый</option><option value="red">Красный</option></select></div></div><label class="muted">Повторение</label><select id="repeat" class="field"><option value="once">Один раз</option><option value="daily">Каждый день</option><option value="weekly">По выбранным дням недели</option></select><div id="weekBox" class="hide"><p class="muted">В какие дни повторять?</p><div class="week" id="week"></div></div><div id="endBox" class="hide"><label class="muted">Дата окончания (необязательно)</label><input id="taskEnd" type="date" class="field"></div><div class="actions"><button class="btn" id="saveTask">✓ Сохранить задачу</button><button class="btn alt" id="cancelTask">Отмена</button></div><p id="taskStatus" class="hint" role="status"></p></div><div class="card"><h2>📋 Мои дополнительные задачи</h2><input id="taskSearch" class="field" placeholder="🔎 Поиск по задачам"><div id="taskList"></div></div></section>
@@ -120,7 +134,7 @@ main{max-width:720px!important;padding:12px 14px 104px!important}
 <section id="goals" class="panel"><div class="card"><h2>🎯 Мои цели</h2><p class="sub">Направления не нужно отмечать каждый день. Отмечай конкретные шаги.</p><input id="goalSearch" class="field" placeholder="🔎 Поиск по целям"><div id="goalList"></div><input id="goalInput" class="field" placeholder="Новая цель"><div class="row"><select id="goalPriority" class="field" aria-label="Приоритет цели"><option value="normal">Обычная</option><option value="important">Важная</option><option value="urgent">Срочная</option><option value="low">Необязательная</option></select><select id="goalColor" class="field" hidden aria-label="Цвет цели"><option value="auto">Цвет по приоритету</option><option value="blue">Синий</option><option value="green">Зелёный</option><option value="yellow">Жёлтый</option><option value="purple">Фиолетовый</option><option value="red">Красный</option></select></div><button class="btn" id="goalAdd">＋ Добавить цель</button></div></section>
 <section id="rituals" class="panel"><div class="card gold ritual-card"><button class="subtle-edit" data-ritual-edit="0" aria-label="Редактировать ритуал">✎</button><h2 id="ritualTitle0">🏆 Ритуал чемпиона · 5 минут</h2><p class="sub preserve" id="ritualDesc0">1 минута — спокойное дыхание. 2 минуты — представь желаемый результат. 2 минуты — выбери первый реальный шаг.</p><textarea id="vision" class="field" placeholder="Что я хочу изменить сегодня?"></textarea><div class="actions"><button id="saveVision" class="btn mini">✓ Сохранить мысль</button><span class="hint" id="visionStatus" role="status"></span></div><div id="ritualChecks"></div></div><div class="card ritual-card"><button class="subtle-edit" data-ritual-edit="1" aria-label="Редактировать ритуал">✎</button><h2 id="ritualTitle1">🌿 Движение без героизма</h2><p class="sub preserve" id="ritualDesc1">10–15 минут мягкой активности, без упражнений через боль.</p></div><div class="card ritual-card"><button class="subtle-edit" data-ritual-edit="2" aria-label="Редактировать ритуал">✎</button><h2 id="ritualTitle2">🌙 Сон — фундамент</h2><p class="sub preserve" id="ritualDesc2">Ориентир 23:00–07:00, но полноценный сон важнее строгого следования часам.</p></div><div id="extraRituals"></div><button class="btn alt" id="addRitual">＋ Добавить ритуал</button></section>
 <section id="history" class="panel"><div class="card"><h2>📈 История дней</h2><input id="historySearch" class="field" placeholder="🔎 Поиск по истории"><div id="historyList"></div></div></section>
-<section id="settings" class="panel"><div class="card"><h2>🏷️ Категории заметок</h2><p class="sub">Добавляй, переименовывай и удаляй категории здесь.</p><div id="categories"></div><div class="row"><input id="newCategory" class="field" placeholder="Новая категория"><button class="btn" id="categoryAdd">＋</button></div></div><div class="card"><h2>🧰 Восстановление базового расписания</h2><p class="sub">Заменяет только шаблон ежедневных этапов и действий на первоначальный. Не удаляет заметки, цели, дополнительные задачи и историю отметок. Перед восстановлением сделай резервную копию.</p><div id="routineEditor" class="hide"></div><button class="btn alt" id="routineAdd" style="display:none">＋</button><button class="btn alt" id="restoreRoutine">Вернуть исходное расписание</button></div><div class="card"><h2>💾 Данные и перенос</h2><p class="sub">Файлы HTML, открытые через content://, могут иметь разное локальное хранилище. Перед сменой версии экспортируй данные. Импорт поддерживает резервные копии предыдущих версий.</p><div class="actions"><button class="btn" id="export">↓ Экспорт JSON</button><button class="btn alt" id="import">↑ Импорт JSON</button><input id="importFile" type="file" accept=".json,application/json" class="hide"></div><p class="hint">Данные не синхронизируются с облаком. Микрофон страницы и диктофон удалены: для них нужен HTTPS. Диктовка клавиатуры остаётся доступной.</p></div></section><footer class="footer">Rubin GP · TODAY v4.8 · Europe/Chișinău<br>Личная жизнь · RGPBusiness · Rubin GP</footer><dialog id="editDialog" class="edit-dialog"><h2 id="editDialogHeading">Редактировать</h2><form id="editDialogForm" method="dialog"><label>Название<input class="field" id="editName" required maxlength="300"></label><label id="editTimeWrap">Время<input class="field" id="editTime" type="time"></label><div id="editRangeWrap"><label>Начало этапа<input class="field" id="editRangeStart" type="time"></label><label>Окончание этапа<input class="field" id="editRangeEnd" type="time"></label></div><label>Описание<textarea class="field" id="editDesc" placeholder="Можно использовать несколько абзацев"></textarea></label><div class="actions"><button class="btn" id="editConfirm" value="save">✓ Сохранить</button><button class="btn alt" value="cancel">Отмена</button></div></form></dialog></main><script>
+<section id="settings" class="panel"><div class="card"><h2>🏷️ Категории заметок</h2><p class="sub">Добавляй, переименовывай и удаляй категории здесь.</p><div id="categories"></div><div class="row"><input id="newCategory" class="field" placeholder="Новая категория"><button class="btn" id="categoryAdd">＋</button></div></div><div class="card"><h2>🧰 Восстановление базового расписания</h2><p class="sub">Заменяет только шаблон ежедневных этапов и действий на первоначальный. Не удаляет заметки, цели, дополнительные задачи и историю отметок. Перед восстановлением сделай резервную копию.</p><div id="routineEditor" class="hide"></div><button class="btn alt" id="routineAdd" style="display:none">＋</button><button class="btn alt" id="restoreRoutine">Вернуть исходное расписание</button></div><div class="card"><h2>💾 Данные и перенос</h2><p class="sub">Файлы HTML, открытые через content://, могут иметь разное локальное хранилище. Перед сменой версии экспортируй данные. Импорт поддерживает резервные копии предыдущих версий.</p><div class="actions"><button class="btn" id="export">↓ Экспорт JSON</button><button class="btn alt" id="import">↑ Импорт JSON</button><input id="importFile" type="file" accept=".json,application/json" class="hide"></div><p class="hint">Данные не синхронизируются с облаком. Микрофон страницы и диктофон удалены: для них нужен HTTPS. Диктовка клавиатуры остаётся доступной.</p></div></section><footer class="footer">Rubin GP · TODAY v4.9 · Europe/Chișinău<br>Личная жизнь · RGPBusiness · Rubin GP</footer><dialog id="editDialog" class="edit-dialog"><h2 id="editDialogHeading">Редактировать</h2><form id="editDialogForm" method="dialog"><label>Название<input class="field" id="editName" required maxlength="300"></label><label id="editTimeWrap">Время<input class="field" id="editTime" type="time"></label><div id="editRangeWrap"><label>Начало этапа<input class="field" id="editRangeStart" type="time"></label><label>Окончание этапа<input class="field" id="editRangeEnd" type="time"></label></div><label>Описание<textarea class="field" id="editDesc" placeholder="Можно использовать несколько абзацев"></textarea></label><div class="actions"><button class="btn" id="editConfirm" value="save">✓ Сохранить</button><button class="btn alt" value="cancel">Отмена</button></div></form></dialog></main><script>
 const initial=[{title:'🌅 Утро силы',range:'07:00–09:00',color:'gold',desc:'Сначала ты, потом уведомления.',tasks:[['07:00','Встать, открыть шторы, сходить в туалет и выпить воды по жажде'],['07:10','Умыться, почистить зубы и принять душ по желанию'],['07:25','Сделать 10–15 минут мягкой зарядки или прогулки'],['07:45','Позавтракать без ленты соцсетей'],['08:15','Провести «Ритуал чемпиона» — 5 минут'],['08:25','Записать одно главное дело дня'],['08:40','Подготовиться к первому делу']]},{title:'🧠 Создаю результат',range:'09:00–12:30',color:'',desc:'Не часы занятости, а конкретный результат.',tasks:[['09:00','Начать главное дело дня: RGPBusiness или поиск работы'],['10:30','Сделать перерыв на 15 минут'],['10:45','Продолжить дело и зафиксировать результат'],['12:00','Проверить сообщения Facebook и Instagram, ответить на важные']]},{title:'🥗 Перезагрузка',range:'12:30–13:30',color:'green',desc:'Еда и пауза — не потерянное время.',tasks:[['12:30','Пообедать'],['13:00','Пройтись или спокойно отдохнуть 10–20 минут']]},{title:'🚀 Развитие',range:'13:30–17:30',color:'',desc:'Продвигай личные цели небольшими шагами.',tasks:[['13:30','Найти вакансии с контактными телефонами и без обязательного CV'],['14:30','Позвонить по подходящим вакансиям или записать контакты'],['15:15','Проверить контент-план Rubin GP и выполнить запланированное действие'],['16:15','Заняться следующей задачей RGPBusiness'],['17:00','Записать, что готово и что перенести на завтра']]},{title:'🌿 Жизнь и баланс',range:'17:30–21:30',color:'green',desc:'Жизнь не должна состоять только из задач.',tasks:[['18:00','Поужинать'],['19:00','Выделить время для прогулки, общения или отдыха'],['21:00','Завершить срочные дела и убрать рабочие уведомления']]},{title:'🌙 Спокойный вечер',range:'21:30–23:00',color:'',desc:'Подготовь энергию для завтрашнего дня.',tasks:[['21:30','Приглушить свет и уменьшить уведомления'],['22:00','Выполнить вечернюю гигиену и подготовить одежду'],['22:30','Заняться чем-то спокойным без ленты соцсетей'],['23:00','Лечь спать — ориентир на полноценный сон']]}];const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const clone=x=>JSON.parse(JSON.stringify(x));const STORAGE='rubingp_myday_v1';let db={};try{db=JSON.parse(localStorage.getItem(STORAGE)||'{}')||{}}catch(e){};
 const defaultGoals=['Найти подходящую работу на 4–5 часов в день','Развивать RGPBusiness и RGP Business Check','Развивать личный бренд Rubin GP'];const defaultCats=['Личное','RGPBusiness','Rubin GP','Идеи'];
 function normalize(){if(!Array.isArray(db.plan)||!db.plan.length)db.plan=clone(initial);db.days??={};db.goals=Array.isArray(db.goals)?db.goals:clone(defaultGoals);db.goalSteps??={};db.recurring=Array.isArray(db.recurring)?db.recurring:[];db.notes=Array.isArray(db.notes)?db.notes:[];db.categories=Array.isArray(db.categories)&&db.categories.length?db.categories:clone(defaultCats);db.oneOff=Array.isArray(db.oneOff)?db.oneOff:[];db.goalDone??={};for(const [d,v] of Object.entries(db.days)){v.done??={};if(Array.isArray(v.extras)){v.extras.forEach(x=>{if(!db.oneOff.some(t=>t.id===x.id))db.oneOff.push({...x,date:d})});delete v.extras}}db.recurring=db.recurring.map(x=>({...x,weekdays:Array.isArray(x.weekdays)?x.weekdays:[0,1,2,3,4,5,6],startDate:x.startDate||'2000-01-01'}));}normalize();function save(){try{localStorage.setItem(STORAGE,JSON.stringify(db));return true}catch(e){alert('Не удалось сохранить данные. Экспортируй резервную копию: '+e.message);return false}}
@@ -480,7 +494,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||
 v4('rubinHomeButton').textContent='⌂';v4('rubinHomeButton').setAttribute('aria-label','Вернуться на главную');
 // Include a clear backup reminder in Settings and a safety warning about local HTML storage.
 const settings=v4('settings');if(settings){const info=document.createElement('div');info.className='card';info.innerHTML='<h2>🛡️ Надёжность данных</h2><p class="sub">Сохранение работает в хранилище текущего браузера. При открытии другой копии HTML через content:// данные могут оказаться недоступны. Для переноса используй «Экспорт JSON» и «Импорт JSON». Не удаляй прежний файл, пока не проверишь импорт.</p><p class="sub">Журнал фиксирует время по часам телефона в часовом поясе Europe/Chisinau. Без подключения к серверу невозможно подтвердить точность системных часов.</p>';settings.prepend(info)}
-const footer=document.querySelector('.footer');if(footer){footer.innerHTML='Rubin GP · TODAY v4.8 · Europe/Chișinău<br>Личная жизнь · RGPBusiness · Rubin GP<br>Локальное хранение · Экспорт и импорт JSON'}
+const footer=document.querySelector('.footer');if(footer){footer.innerHTML='Rubin GP · TODAY v4.9 · Europe/Chișinău<br>Личная жизнь · RGPBusiness · Rubin GP<br>Локальное хранение · Экспорт и импорт JSON'}
 // Do not claim a successful save if browser storage is full or disabled.
 
 /* v4.7 quality fixes: distinct cards, metadata, calendar/today deletion */
@@ -499,7 +513,7 @@ const prevRefresh45=refresh;refresh=function(){prevRefresh45();renderTaskList();
 renderTaskList();renderCalendar();renderToday();
 const f45=document.querySelector('.footer');if(f45)f45.innerHTML=f45.innerHTML.replace(/v4\.4/g,'v4.7');
 
-notify('Rubin GP | TODAY v4.8 — исправления установлены');
+notify('Rubin GP | TODAY v4.9 — исправления установлены');
 })();
 </script>
 
@@ -580,8 +594,8 @@ if(search){
 
 <style>
 #rubinCover{height:116px;border-radius:15px;background:linear-gradient(115deg,#182b46,#345272 55%,#16273d);background-position:center;background-size:cover;margin:0 0 12px;position:relative;overflow:hidden}
-#rubinCover button{position:absolute;right:9px;bottom:9px;background:#0d1c30d9;border:1px solid #9caec3;color:#fff;border-radius:9px;padding:7px 10px;font-size:12px}
-#rubinCover .cover-remove{right:110px}
+#rubinCover button{position:absolute;right:8px;bottom:8px;background:#0d1c30b8;border:1px solid #ffffff66;color:#fff;border-radius:50%;width:29px;height:29px;padding:0;font-size:15px;cursor:pointer}
+
 .record-meta{font-size:11px;color:#98adc5;margin-top:9px}
 #v4VisionSaved .saved-actions{display:flex;gap:8px;margin-top:10px}
 #v4VisionSaved button{border:1px solid #5e7793;background:#223650;color:#f0f5fc;border-radius:9px;padding:8px}
@@ -589,17 +603,61 @@ if(search){
 <script>
 (function(){
  const $=id=>document.getElementById(id);
+
  const hero=document.querySelector('header.hero');
  if(hero){
-   const cover=document.createElement('div');cover.id='rubinCover';
-   cover.innerHTML='<button type="button" class="cover-remove" hidden>Удалить</button><button type="button" class="cover-edit">✎ Шапка</button><input type="file" accept="image/*" hidden>';
+   const cover=document.createElement('div');
+   cover.id='rubinCover';
+   cover.innerHTML='<button type="button" class="cover-edit" aria-label="Настроить шапку" title="Настроить шапку">✎</button>';
    hero.prepend(cover);
-   const file=cover.querySelector('input');
-   function paint(){let img;try{img=localStorage.getItem('rubin_today_cover_v1')}catch(e){}cover.style.backgroundImage=img?'linear-gradient(#07132622,#07132622),url('+JSON.stringify(img)+')':'';cover.querySelector('.cover-remove').hidden=!img}
-   cover.querySelector('.cover-edit').onclick=()=>file.click();
-   file.onchange=()=>{const f=file.files?.[0];if(!f)return;if(f.size>3*1024*1024){alert('Выбери фотографию до 3 МБ.');return}const reader=new FileReader();reader.onload=()=>{try{localStorage.setItem('rubin_today_cover_v1',reader.result);paint()}catch(e){alert('Недостаточно памяти для шапки. Выбери изображение меньшего размера.')}};reader.readAsDataURL(f)};
-   cover.querySelector('.cover-remove').onclick=()=>{if(confirm('Удалить шапку?')){localStorage.removeItem('rubin_today_cover_v1');paint()}};
-   paint();
+   const dlg=document.createElement('dialog');
+   dlg.id='coverCropDialog';
+   dlg.innerHTML=`<div class="crop-head"><strong>Шапка профиля</strong><button type="button" id="coverClose" aria-label="Закрыть">×</button></div>
+    <div class="crop-preview" id="cropPreview"><div class="crop-hint">Перетаскивай фото пальцем</div></div>
+    <label class="crop-label">Масштаб <output id="cropZoomValue">100%</output><input id="cropZoom" type="range" min="100" max="400" value="100" step="5"></label>
+    <div class="crop-grid">
+    <label>По горизонтали <input id="cropX" type="range" min="0" max="100" value="50"></label>
+    <label>По вертикали <input id="cropY" type="range" min="0" max="100" value="50"></label></div>
+    <div class="crop-actions"><button type="button" id="coverChoose">Выбрать фото</button><button type="button" id="coverReset">Сбросить кадр</button><button type="button" id="coverDelete">Удалить шапку</button><button type="button" id="coverSave">✓ Готово</button></div>
+    <input type="file" id="coverFile" accept="image/*" hidden>`;
+   document.body.append(dlg);
+   const $c=id=>dlg.querySelector('#'+id);
+   const file=$c('coverFile'),preview=$c('cropPreview');
+   const defaults={x:50,y:50,zoom:100};
+   let state={...defaults},imageData='';
+   const imageKey='rubin_today_cover_v1', cropKey='rubin_today_cover_crop_v1';
+   try{imageData=localStorage.getItem(imageKey)||'';state={...defaults,...JSON.parse(localStorage.getItem(cropKey)||'{}')}}catch(e){}
+   const cssImage=()=>imageData?'linear-gradient(#07132622,#07132622),url('+JSON.stringify(imageData)+')':'';
+   function paint(el){el.style.backgroundImage=cssImage();el.style.backgroundPosition=`center,${state.x}% ${state.y}%`;el.style.backgroundSize=`cover,${state.zoom}% auto`;el.style.backgroundRepeat='no-repeat';}
+   function update(){
+     paint(cover);paint(preview);
+     for(const [id,key] of [['cropX','x'],['cropY','y'],['cropZoom','zoom']])$c(id).value=state[key];
+     $c('cropZoomValue').textContent=state.zoom+'%';
+     $c('coverDelete').hidden=!imageData;
+   }
+   cover.querySelector('.cover-edit').onclick=()=>{update();dlg.showModal()};
+   $c('coverClose').onclick=()=>dlg.close();
+   $c('coverChoose').onclick=()=>file.click();
+   $c('coverReset').onclick=()=>{state={...defaults};update()};
+   $c('coverDelete').onclick=()=>{if(!confirm('Удалить шапку профиля?'))return;imageData='';localStorage.removeItem(imageKey);localStorage.removeItem(cropKey);state={...defaults};update();dlg.close()};
+   $c('coverSave').onclick=()=>{try{localStorage.setItem(cropKey,JSON.stringify(state));update();dlg.close()}catch(e){alert('Не удалось сохранить кадрирование.')}};
+   for(const [id,key] of [['cropX','x'],['cropY','y'],['cropZoom','zoom']])$c(id).oninput=e=>{state[key]=Number(e.target.value);update()};
+   file.onchange=()=>{
+     const f=file.files?.[0];if(!f)return;
+     if(f.size>3*1024*1024){alert('Выбери фотографию до 3 МБ.');return}
+     const reader=new FileReader();
+     reader.onload=()=>{const previous=imageData;imageData=String(reader.result);state={...defaults};
+       try{localStorage.setItem(imageKey,imageData);localStorage.setItem(cropKey,JSON.stringify(state));update()}
+       catch(e){imageData=previous;alert('Не хватает памяти для изображения. Выбери файл меньшего размера.');update()}
+     };
+     reader.readAsDataURL(f);
+   };
+   let drag=null;
+   preview.addEventListener('pointerdown',e=>{if(!imageData)return;drag={x:e.clientX,y:e.clientY,sx:state.x,sy:state.y};preview.setPointerCapture(e.pointerId)});
+   preview.addEventListener('pointermove',e=>{if(!drag)return;const rect=preview.getBoundingClientRect();state.x=Math.max(0,Math.min(100,drag.sx-(e.clientX-drag.x)/rect.width*100));state.y=Math.max(0,Math.min(100,drag.sy-(e.clientY-drag.y)/rect.height*100));update()});
+   preview.addEventListener('pointerup',()=>drag=null);
+   preview.addEventListener('pointercancel',()=>drag=null);
+   update();
  }
  // Render updates immediately after save/delete handlers have mutated data.
  const affected='#taskList,#todayTasks,#calList,#goalList,#noteList,#v4RitualList';
@@ -622,7 +680,27 @@ if(search){
      input.focus();input.scrollIntoView({block:'center',behavior:'smooth'});
    };
  }
-
+ // Date metadata: local wall-clock time for all new entries where original code lacks it.
+ const timestamp=()=>new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Chisinau',dateStyle:'short',timeStyle:'short'}).format(new Date());
+ const goals=$('goalList'), notes=$('noteList');
+ if(goals||notes){
+  const obs=new MutationObserver(mutations=>{
+   obs.disconnect();
+   for(const [root,selector] of [[goals,'.goal-entry'],[notes,'.item']]){
+    if(!root)continue;
+    root.querySelectorAll(selector).forEach(el=>{
+     if(el.querySelector('.record-meta'))return;
+     const meta=document.createElement('div');meta.className='record-meta';
+     meta.textContent='Время создания: для старой записи не сохранено';
+     el.append(meta);
+    });
+   }
+   if(goals)obs.observe(goals,{childList:true});
+   if(notes)obs.observe(notes,{childList:true});
+  });
+  if(goals)obs.observe(goals,{childList:true});
+  if(notes)obs.observe(notes,{childList:true});
+ }
 })();
 </script>
 </body></html>
