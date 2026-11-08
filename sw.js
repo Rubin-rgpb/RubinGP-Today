@@ -1,4 +1,4 @@
-const CACHE = 'rubin-gp-today-v14-editor-fixes';
+const CACHE = 'rubin-gp-today-v15-goals-redesign';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './rubin-today-v6-192.png', './rubin-today-v6-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
