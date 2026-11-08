@@ -1,7 +1,7 @@
 {
   "name": "Rubin GP | TODAY",
   "short_name": "Rubin GP | TODAY",
-  "description": "Личный ежедневник с задачами, целями и напоминаниями",
+  "description": "Личный ежедневник с задачами, целями и календарём",
   "lang": "ru",
   "start_url": "./",
   "scope": "./",
